@@ -170,27 +170,25 @@ public class actions extends HttpServlet {
         if (arvores.size() > 0) {
             for (int i = 0; i < arvores.size(); i++) {
 
-                saida.write("objeto");
+                saida.write("arvore");
 
-                saida.write("@#$%" + arvores.get(i).getId());
+                saida.write("@#" + arvores.get(i).getId());
 
-                saida.write("@#$%" + arvores.get(i).getEspecie().getId());
+                saida.write("@#" + arvores.get(i).getEspecie().getId());
 
-                saida.write("@#$%" + arvores.get(i).getIdade());
+                saida.write("@#" + arvores.get(i).getIdade());
 
-                saida.write("@#$%" + arvores.get(i).getLatitude());
+                saida.write("@#" + arvores.get(i).getLatitude());
 
-                saida.write("@#$%" + arvores.get(i).getLongitude());
+                saida.write("@#" + arvores.get(i).getLongitude());
 
-                saida.write("@#$%" + arvores.get(i).getEnderecoGeoCode());
+                saida.write("@#" + arvores.get(i).getEnderecoGeoCode());
 
-                saida.write("@#$%" + arvores.get(i).getPropietario().getId());
+                saida.write("@#" + arvores.get(i).getPropietario().getId());
 
-                saida.write("@#$%" + arvores.get(i).getUsuario().getId());
+                saida.write("@#" + arvores.get(i).getUsuario().getId());
 
-                saida.write("@#$%" + arvores.get(i).getStatus());
-
-                saida.write("<br>");
+                saida.write("@#" + arvores.get(i).getStatus());
 
 //                saida.write("________________");
 //                saida.write("<br>");
@@ -226,28 +224,27 @@ public class actions extends HttpServlet {
         Arvore arvore = db.consultarArvore(av);
         if (arvore != null) {
 
-            saida.write("objeto");
+            saida.write("arvore");
 
-            saida.write("@#$%" + arvore.getId());
+            saida.write("@#" + arvore.getId());
 
-            saida.write("@#$%" + arvore.getEspecie().getId());
+            saida.write("@#" + arvore.getEspecie().getId());
 
-            saida.write("@#$%" + arvore.getIdade());
+            saida.write("@#" + arvore.getIdade());
 
-            saida.write("@#$%" + arvore.getLatitude());
+            saida.write("@#" + arvore.getLatitude());
 
-            saida.write("@#$%" + arvore.getLongitude());
+            saida.write("@#" + arvore.getLongitude());
 
-            saida.write("@#$%" + arvore.getEnderecoGeoCode());
+            saida.write("@#" + arvore.getEnderecoGeoCode());
 
-            saida.write("@#$%" + arvore.getPropietario().getId());
+            saida.write("@#" + arvore.getPropietario().getId());
 
-            saida.write("@#$%" + arvore.getUsuario().getId());
+            saida.write("@#" + arvore.getUsuario().getId());
 
-            saida.write("@#$%" + arvore.getStatus());
+            saida.write("@#" + arvore.getStatus());
 
-            saida.write("<br>");
-
+       
         } else {
             saida.write("3 - Não foi localizado nenhum registro");
         }
@@ -259,12 +256,11 @@ public class actions extends HttpServlet {
         ArrayList<Especie> especies = db.consultarTodas();
         if (especies.size() > 0) {
             for (int i = 0; i < especies.size(); i++) {
-                saida.write("objeto");
-                saida.write("@#$%" + especies.get(i).getId());
-                saida.write("@#$%" + especies.get(i).getNome());            
-                saida.write("@#$%" + especies.get(i).getDscricao());
-                saida.write("<br>");
-            }
+                saida.write("especie");
+                saida.write("@#" + especies.get(i).getId());
+                saida.write("@#" + especies.get(i).getNome());            
+                saida.write("@#" + especies.get(i).getDscricao());
+                   }
         } else {
             saida.write("3 - Não foi localizado nenhum registro");
         }
@@ -275,14 +271,14 @@ public class actions extends HttpServlet {
         ArrayList<Atividades> atividades = db.consultarTodas();
         if (atividades.size() > 0) {
             for (int i = 0; i < atividades.size(); i++) {
-                saida.write("objeto");
+                saida.write("atividade");
              
-                saida.write("@#$%" + atividades.get(i).getId());
-                saida.write("@#$%");
-                saida.write("@#$%" + atividades.get(i).getNome());
-                saida.write("@#$%");
-                saida.write("@#$%" + atividades.get(i).getDescricao());
-                saida.write("<br>");
+                saida.write("@#" + atividades.get(i).getId());
+                saida.write("@#");
+                saida.write("@#" + atividades.get(i).getNome());
+                saida.write("@#");
+                saida.write("@#" + atividades.get(i).getDescricao());
+       
             }
         } else {
             saida.write("3 - Não foi localizado nenhum registro");
@@ -294,16 +290,15 @@ public class actions extends HttpServlet {
         ArrayList<Proprietario> p = db.consultarTodas();
         if (p.size() > 0) {
             for (int i = 0; i < p.size(); i++) {
-                saida.write("objeto");
+                saida.write("proprietario");
               
-                saida.write("@#$%" + p.get(i).getId());
+                saida.write("@#" + p.get(i).getId());
               
-                saida.write("@#$%" + p.get(i).getNome());
-                saida.write("@#$%" + p.get(i).getIdentificacao());
-                saida.write("@#$%" + p.get(i).getEnderecoRua());
-                saida.write("@#$%" + p.get(i).getCidade().getId());
-                saida.write("<br>");
-            }
+                saida.write("@#" + p.get(i).getNome());
+                saida.write("@#" + p.get(i).getIdentificacao());
+                saida.write("@#" + p.get(i).getEnderecoRua());
+                saida.write("@#" + p.get(i).getCidade().getId());
+                  }
         } else {
             saida.write("3 - Não foi localizado nenhum registro");
         }
@@ -316,18 +311,18 @@ public class actions extends HttpServlet {
         Proprietario p = db.consultarProprietario(pr);
 
         if (p != null) {
-            saida.write("objeto");
+            saida.write("proprietario");
             
-            saida.write("@#$%" + p.getId());
+            saida.write("@#" + p.getId());
           
-            saida.write("@#$%" + p.getNome());
+            saida.write("@#" + p.getNome());
        
-            saida.write("@#$%" + p.getIdentificacao());
+            saida.write("@#" + p.getIdentificacao());
             
-            saida.write("@#$%" + p.getEnderecoRua());
+            saida.write("@#" + p.getEnderecoRua());
            
-            saida.write("@#$%" + p.getCidade().getId());
-            saida.write("<br>");
+            saida.write("@#" + p.getCidade().getId());
+       
         }
 
     }
