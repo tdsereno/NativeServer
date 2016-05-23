@@ -7,7 +7,7 @@
             <minimum-ant-version>1.6.5</minimum-ant-version>
             <web-module-libraries>
                 <library dirs="200">
-                    <file>${file.reference.postgresql-9.4.1208.jre6.jar-1}</file>
+                    <file>${file.reference.postgresql-9.4.1208.jre6.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>
@@ -15,9 +15,7 @@
             <source-roots>
                 <root id="src.dir" name="Pacotes de Códigos-fonte"/>
             </source-roots>
-            <test-roots>
-                <root id="test.src.dir" name="Pacotes de Teste"/>
-            </test-roots>
+            <test-roots/>
         </data>
     </configuration>
 </project>

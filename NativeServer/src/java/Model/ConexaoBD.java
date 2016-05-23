@@ -1,5 +1,6 @@
 package Model;
 
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -21,12 +22,13 @@ public class ConexaoBD {
         try {
             // Carrega informações do arquivo de propriedades
             Properties prop = new Properties();
-            // prop.load(new FileInputStream("DB.properties"));
-
-            String dbdriver  = "org.postgresql.Driver";
-            String dburl  = "jdbc:postgresql://localhost:5432/native";
+            //prop.load(new FileInputStream("DB.propertie s"));
+            String dbdriver = "org.postgresql.Driver";
+            String dburl = "jdbc:postgresql://localhost:5432/native";
             String dbuser = "postgres";
             String dbsenha = "postgres";
+         
+
 
             // Carrega Driver do Banco de Dados
             Class.forName(dbdriver);
@@ -71,3 +73,4 @@ public class ConexaoBD {
         }
     }
 }
+

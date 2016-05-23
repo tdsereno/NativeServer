@@ -33,6 +33,7 @@ public class AtividadesDb {
 
         } catch (Exception e) {
             System.out.println("Erro 0002 ao consultar atividades = " + e);
+             System.out.println("Erro 0003 ao consultar atividades = " + e.toString());
             return null;
         }
         return especies;

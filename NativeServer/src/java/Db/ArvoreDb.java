@@ -48,7 +48,7 @@ public class ArvoreDb {
                         + "geocode= '" + arvore.getEnderecoGeoCode() + "',"
                         + "proprietario_idproprietario = '" + arvore.getPropietario().getId() + "',"
                         + "usuario_idusuario = '" + arvore.getUsuario().getId() + "',"
-                        + "status ='" + arvore.getStatus() + "' where idarvore = "+arvore.getId();
+                        + "status ='" + arvore.getStatus() + "' where idarvore = " + arvore.getId();
             }
             System.out.println("SQL = " + sql);
 
@@ -63,7 +63,8 @@ public class ArvoreDb {
     public ArrayList<Arvore> consultarTodas() {
         ArrayList<Arvore> arvores = new ArrayList<>();
 
-        String sql = "select * from arvore ORDER BY idarvore"; 
+        String sql = "select * from arvore ORDER BY idarvore";
+        System.out.println("sql "+sql);
         try {
             ResultSet resultado = ConexaoBD.getInstance().getConnection().createStatement().executeQuery(sql);
 
@@ -89,6 +90,7 @@ public class ArvoreDb {
 
         } catch (Exception e) {
             System.out.println("Erro 0002 ao consultar arvores = " + e);
+            System.out.println("Erro 0002 ao consultar arvores error =  " + e.toString());
             return null;
         }
         return arvores;
@@ -96,7 +98,7 @@ public class ArvoreDb {
 
     public Arvore consultarArvore(Arvore arvore) {
 
-        String sql = "select * from arvore where idarvore = " + arvore.getId() +" ORDER BY idarvore"; // RS
+        String sql = "select * from arvore where idarvore = " + arvore.getId() + " ORDER BY idarvore"; // RS
         try {
             ResultSet resultado = ConexaoBD.getInstance().getConnection().createStatement().executeQuery(sql);
             Arvore v = new Arvore();

@@ -5,6 +5,11 @@
         <group>
             <file>file:/C:/Users/Tiago/Documents/GitHub/NativeServer/NativeServer/web/server.jsp</file>
             <file>file:/C:/Users/Tiago/Documents/GitHub/NativeServer/NativeServer/src/java/Control/actions.java</file>
+            <file>file:/C:/Users/Tiago/Documents/GitHub/NativeServer/NativeServer/src/java/Model/ConexaoBD.java</file>
+            <file>file:/C:/Users/Tiago/Documents/GitHub/NativeServer/NativeServer/src/java/Db/ArvoreDb.java</file>
+            <file>file:/C:/Users/Tiago/Documents/GitHub/NativeServer/NativeServer/src/java/Db/ProprietarioDb.java</file>
+            <file>file:/C:/Users/Tiago/Documents/GitHub/NativeServer/NativeServer/src/conf/MANIFEST.MF</file>
+            <file>file:/C:/Users/Tiago/Documents/GitHub/NativeServer/NativeServer/nbproject/build-impl.xml</file>
         </group>
     </open-files>
 </project-private>
