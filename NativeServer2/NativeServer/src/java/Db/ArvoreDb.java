@@ -66,9 +66,10 @@ public class ArvoreDb {
         String sql = "select * from arvore ORDER BY idarvore";
         System.out.println("sql "+sql);
         try {
-    
-            ResultSet resultado = ConexaoBD.getInstance().getConnection().createStatement().executeQuery(sql);
-
+            System.out.println("start");
+            ConexaoBD bd = new ConexaoBD();
+            ResultSet resultado = bd.getInstance().getConnection().createStatement().executeQuery(sql);
+            System.out.println("stop");
             while (resultado.next()) {
                 Arvore v = new Arvore();
                 v.setEnderecoGeoCode(resultado.getString("geocode"));
@@ -90,7 +91,7 @@ public class ArvoreDb {
             }
 
         } catch (Exception e) {
-            System.out.println("Erro 0002 ao consultar arvores = " + e);
+            System.out.println("Erro 0002aasd ao consultar arvores = " + e);
             System.out.println("Erro 0002 ao consultar arvores error =  " + e.toString());
             return null;
         }
@@ -124,7 +125,7 @@ public class ArvoreDb {
             }
 
         } catch (Exception e) {
-            System.out.println("Erro 0002 ao consultar arvores = " + e);
+            System.out.println("Erro 000222 ao consultar arvores = " + e);
             return null;
         }
         return null;
