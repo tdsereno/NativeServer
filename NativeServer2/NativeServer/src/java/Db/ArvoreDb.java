@@ -66,6 +66,7 @@ public class ArvoreDb {
         String sql = "select * from arvore ORDER BY idarvore";
         System.out.println("sql "+sql);
         try {
+    
             ResultSet resultado = ConexaoBD.getInstance().getConnection().createStatement().executeQuery(sql);
 
             while (resultado.next()) {
