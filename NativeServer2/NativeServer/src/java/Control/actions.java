@@ -6,13 +6,15 @@ package Control;
  * and open the template in the editor.
  */
 import Db.ArvoreDb;
-import Db.AtividadesDb;
 import Db.EspecieDb;
 import Db.ProprietarioDb;
+import Db.SolicitacaoDB;
+import Db.TipoServicoDb;
 import Model.Arvore;
-import Model.Atividades;
 import Model.Especie;
 import Model.Proprietario;
+import Model.Solicitacao;
+import Model.TipoServico;
 import Model.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -66,8 +68,11 @@ public class actions extends HttpServlet {
 
         } else if (requisicao.getParameter("acao").equals("listAllEspecie")) {
             listarEspecies();
-        } else if (requisicao.getParameter("acao").equals("listAllAtividades")) {
-            listarAtividades();
+        } else if (requisicao.getParameter("acao").equals("listAllSolicitacoes")) {
+            listarSolicitacoes();
+        } else if (requisicao.getParameter("acao").equals("listAllTipoServico")) {
+            listarTiposServico();
+
         } else if (requisicao.getParameter("acao").equals("listAllProprietarios")) {
             listarProprietarios();
         } else if (requisicao.getParameter("acao").equals("listProprietario")) {
@@ -148,9 +153,7 @@ public class actions extends HttpServlet {
         propietario.setId(Integer.parseInt(idpropietario));
         v.setPropietario(propietario);
         v.setStatus(status);
-        Usuario u = new Usuario();
-        u.setId(Integer.parseInt(idusuario));
-        v.setUsuario(u);
+
         if (salvarArvore(v)) {
             saida.write("1 - Registro salvo com sucesso");
         } else {
@@ -185,8 +188,6 @@ public class actions extends HttpServlet {
                 saida.write("@#" + arvores.get(i).getEnderecoGeoCode());
 
                 saida.write("@#" + arvores.get(i).getPropietario().getId());
-
-                saida.write("@#" + arvores.get(i).getUsuario().getId());
 
                 saida.write("@#" + arvores.get(i).getStatus());
 
@@ -240,11 +241,8 @@ public class actions extends HttpServlet {
 
             saida.write("@#" + arvore.getPropietario().getId());
 
-            saida.write("@#" + arvore.getUsuario().getId());
-
             saida.write("@#" + arvore.getStatus());
 
-       
         } else {
             saida.write("3 - Não foi localizado nenhum registro");
         }
@@ -258,27 +256,32 @@ public class actions extends HttpServlet {
             for (int i = 0; i < especies.size(); i++) {
                 saida.write("especie");
                 saida.write("@#" + especies.get(i).getId());
-                saida.write("@#" + especies.get(i).getNome());            
+                saida.write("@#" + especies.get(i).getNome());
                 saida.write("@#" + especies.get(i).getDscricao());
-                   }
+            }
         } else {
             saida.write("3 - Não foi localizado nenhum registro");
         }
     }
 
-    public void listarAtividades() {
-        AtividadesDb db = new AtividadesDb();
-        ArrayList<Atividades> atividades = db.consultarTodas();
-        if (atividades.size() > 0) {
-            for (int i = 0; i < atividades.size(); i++) {
-                saida.write("atividade");
-             
-                saida.write("@#" + atividades.get(i).getId());
-                saida.write("@#");
-                saida.write("@#" + atividades.get(i).getNome());
-                saida.write("@#");
-                saida.write("@#" + atividades.get(i).getDescricao());
-       
+    public void listarSolicitacoes() {
+        SolicitacaoDB db = new SolicitacaoDB();
+        ArrayList<Solicitacao> solicitacao = db.consultarTodas();
+        if (solicitacao.size() > 0) {
+            for (int i = 0; i < solicitacao.size(); i++) {
+                saida.write("solicitacao");
+
+                saida.write("@#" + solicitacao.get(i).getId());
+
+                saida.write("@#" + solicitacao.get(i).getUsuario().getId());
+
+                saida.write("@#" + solicitacao.get(i).getProprietario().getId());
+                saida.write("@#" + solicitacao.get(i).getDataSolicitacao());
+
+                saida.write("@#" + solicitacao.get(i).getDataEncerramento());
+
+                saida.write("@#" + solicitacao.get(i).getDescricao());
+
             }
         } else {
             saida.write("3 - Não foi localizado nenhum registro");
@@ -291,14 +294,33 @@ public class actions extends HttpServlet {
         if (p.size() > 0) {
             for (int i = 0; i < p.size(); i++) {
                 saida.write("proprietario");
-              
+
                 saida.write("@#" + p.get(i).getId());
-              
+
                 saida.write("@#" + p.get(i).getNome());
                 saida.write("@#" + p.get(i).getIdentificacao());
                 saida.write("@#" + p.get(i).getEnderecoRua());
                 saida.write("@#" + p.get(i).getCidade().getId());
-                  }
+            }
+        } else {
+            saida.write("3 - Não foi localizado nenhum registro");
+        }
+    }
+
+    public void listarTiposServico() {
+        TipoServicoDb db = new TipoServicoDb();
+        ArrayList<TipoServico> tp = db.consultarTodas();
+        if (tp.size() > 0) {
+            for (int i = 0; i < tp.size(); i++) {
+                saida.write("tiposervico");
+
+                saida.write("@#" + tp.get(i).getId());
+
+                saida.write("@#" + tp.get(i).getNome());
+
+                saida.write("@#" + tp.get(i).getDescricao());
+
+            }
         } else {
             saida.write("3 - Não foi localizado nenhum registro");
         }
@@ -312,17 +334,17 @@ public class actions extends HttpServlet {
 
         if (p != null) {
             saida.write("proprietario");
-            
+
             saida.write("@#" + p.getId());
-          
+
             saida.write("@#" + p.getNome());
-       
+
             saida.write("@#" + p.getIdentificacao());
-            
+
             saida.write("@#" + p.getEnderecoRua());
-           
+
             saida.write("@#" + p.getCidade().getId());
-       
+
         }
 
     }

@@ -19,7 +19,6 @@ public class ConexaoBD {
     private Connection conexao = null;
 
     public ConexaoBD() {
-        System.out.println("inicio construtor");
         try {
           
             // Carrega informações do arquivo de propriedades
@@ -33,9 +32,7 @@ public class ConexaoBD {
 
 
             // Carrega Driver do Banco de Dados
-            System.out.println("carregando driver bd");
             Class.forName(dbdriver);
-            System.out.println("carregado");
             if (dbuser.length() != 0) // conexão COM usuário e senha
             {
                 conexao = DriverManager.getConnection(dburl, dbuser, dbsenha);
@@ -45,30 +42,24 @@ public class ConexaoBD {
             }
 
         } catch (Exception e) {
-            System.out.println("erro ao criar conex "+e);
+      
             System.err.println(e);
         }
     }
 
     // Retorna instância
     public static ConexaoBD getInstance() {
-        System.out.println("instanciando");
         if (instancia == null) {
-            System.out.println("constructor");
             instancia = new ConexaoBD();
-            System.out.println("done");
         }
         return instancia;
     }
 
     // Retorna conexão
     public Connection getConnection() {
-        System.out.println("get conection");
         if (conexao == null) {
-            System.out.println("errror cx nul");
             throw new RuntimeException("conexao==null");
         }
-        System.out.println("return");
         return conexao;
     }
 

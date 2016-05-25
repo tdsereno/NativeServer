@@ -9,7 +9,7 @@ import Model.Arvore;
 import Model.ConexaoBD;
 import Model.Especie;
 import Model.Proprietario;
-import Model.Usuario;
+
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -35,7 +35,6 @@ public class ArvoreDb {
                         + "'" + arvore.getLongitude() + "',"
                         + "'" + arvore.getEnderecoGeoCode() + "',"
                         + "'" + arvore.getPropietario().getId() + "',"
-                        + "'" + arvore.getUsuario().getId() + "',"
                         + "'" + arvore.getStatus() + "')";
             } else {
                 // update
@@ -47,7 +46,7 @@ public class ArvoreDb {
                         + "long = '" + arvore.getLongitude() + "',"
                         + "geocode= '" + arvore.getEnderecoGeoCode() + "',"
                         + "proprietario_idproprietario = '" + arvore.getPropietario().getId() + "',"
-                        + "usuario_idusuario = '" + arvore.getUsuario().getId() + "',"
+                   
                         + "status ='" + arvore.getStatus() + "' where idarvore = " + arvore.getId();
             }
             System.out.println("SQL = " + sql);
@@ -84,14 +83,11 @@ public class ArvoreDb {
                 p.setId(resultado.getInt("proprietario_idproprietario"));
                 v.setPropietario(p);
                 v.setStatus(resultado.getString("status"));
-                Usuario u = new Usuario();
-                u.setId(resultado.getInt("usuario_idusuario"));
-                v.setUsuario(u);
-                arvores.add(v);
+                            arvores.add(v);
             }
 
         } catch (Exception e) {
-            System.out.println("Erro 0002aasd ao consultar arvores = " + e);
+  
             System.out.println("Erro 0002 ao consultar arvores error =  " + e.toString());
             return null;
         }
@@ -108,7 +104,7 @@ public class ArvoreDb {
 
                 v.setEnderecoGeoCode(resultado.getString("geocode"));
                 Especie e = new Especie();
-                e.setId(resultado.getInt("especie_idespecie"));
+                e.setId(resultado.getInt("especie_idespecie")); 
                 v.setEspecie(e);
                 v.setId(resultado.getInt("idarvore"));
                 v.setIdade(resultado.getInt("idade"));
@@ -118,9 +114,6 @@ public class ArvoreDb {
                 p.setId(resultado.getInt("proprietario_idproprietario"));
                 v.setPropietario(p);
                 v.setStatus(resultado.getString("status"));
-                Usuario u = new Usuario();
-                u.setId(resultado.getInt("usuario_idusuario"));
-                v.setUsuario(u);
                 return v;
             }
 

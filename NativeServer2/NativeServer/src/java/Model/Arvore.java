@@ -40,7 +40,6 @@ public class Arvore {
         this.longitude = longitude;
     }
     Proprietario propietario;
-    Usuario usuario;
     Especie especie;
 
     public Especie getEspecie() {
@@ -86,12 +85,5 @@ public class Arvore {
         this.propietario = propietario;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
 
 }
