@@ -68,7 +68,18 @@ public class actions extends HttpServlet {
 
         } else if (requisicao.getParameter("acao").equals("listAllEspecie")) {
             listarEspecies();
-        } else if (requisicao.getParameter("acao").equals("listAllSolicitacoes")) {
+        } else if (requisicao.getParameter("acao").equals("listEspecie")) {
+            int id = 0;
+            try {
+                id = Integer.parseInt(requisicao.getParameter("id"));
+                listEspecie(id);
+            } catch (Exception e) {
+                saida.write("Não foi informado o parametro obrigatorio ID da especie");
+            }
+   }     
+        
+        
+        else if (requisicao.getParameter("acao").equals("listAllSolicitacoes")) {
             listarSolicitacoes();
         } else if (requisicao.getParameter("acao").equals("listAllTipoServico")) {
             listarTiposServico();
@@ -349,4 +360,26 @@ public class actions extends HttpServlet {
 
     }
 
+    
+    
+    private void listEspecie(int id) {
+        EspecieDb db = new EspecieDb();
+        Especie e = new Especie();
+        e.setId(id);
+        Especie especie = db.consultarEspecie(e);
+
+        if (e != null) {
+            saida.write("especie");
+
+            saida.write("@#" + especie.getId());
+
+            saida.write("@#" + especie.getNome());
+
+            saida.write("@#" + especie.getDscricao());
+
+        }
+
+    }
+
+    
 }

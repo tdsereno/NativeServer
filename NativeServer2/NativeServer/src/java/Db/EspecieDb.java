@@ -37,5 +37,25 @@ public class EspecieDb {
         }
         return especies;
     }
+   public Especie consultarEspecie(Especie e) {
 
+        String sql = "select * from especie where idespecie = " + e.getId() + " ORDER BY idespecie"; // RS
+        System.out.println(sql);
+        try {
+            ResultSet resultado = ConexaoBD.getInstance().getConnection().createStatement().executeQuery(sql);
+
+            if (resultado.next()) {
+                Especie esp = new Especie();
+                esp.setId(resultado.getInt("idespecie"));
+                esp.setNome(resultado.getString("nome"));
+                
+                return esp;
+            }
+
+        } catch (Exception ex) {
+            System.out.println("Erro 0002 ao consultar especie = " + ex);
+            return null;
+        }
+        return null;
+    }
 }
