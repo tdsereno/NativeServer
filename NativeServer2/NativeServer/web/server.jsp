@@ -34,7 +34,11 @@
         <span><a href="/NativeServer/actions?acao=listAllProprietarios">Clique aqui para listar todos proprietarios</a></span>
         <br>
         <span><a href="/NativeServer/actions?acao=listProprietario&id=1">Clique aqui para consultar um proprietarios pelo id (passado por get)</a></span>
+        <br>
+        <span><a href="/NativeServer/actions?acao=cadProp&id=0&nome=tiago&identificacao=123.456.789-00&idcidade=0&endrua=rua&lat=99&long=33">Clique aqui para inserir um proprietario de exemplo</a></span>
+        <br>
         
+
 
 
     </body>

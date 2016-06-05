@@ -9,6 +9,7 @@ import Model.Cidade;
 import Model.ConexaoBD;
 import Model.Proprietario;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -17,6 +18,44 @@ import java.util.ArrayList;
  */
 public class ProprietarioDb {
 
+    
+    public Boolean salvar(Proprietario p) {
+        try {
+            Statement st = ConexaoBD.getInstance().getConnection().createStatement();
+            String sql = "";
+
+            if (p.getId() == 0) {
+
+                sql = "INSERT INTO proprietario VALUES"
+                        + "(DEFAULT, "
+                        
+                        + "'" + p.getNome() + "',"
+                        + "'" + p.getIdentificacao() + "',"
+                        + "'" + p.getEnderecoRua() + "',"
+                        + "'" + p.getCidade().getId() + "',"
+                        + "'" + p.getLatitude() + "',"
+                        + "'" + p.getLongitude() + "')";
+            } else {
+                // update
+                sql = "update arvore set nome = "
+                        + "'" + p.getNome() + "',"
+                        + "identificacao = '" + p.getIdentificacao() + "',"
+                        + "end_rua = '" + p.getEnderecoRua()  + "',"
+                        + "cidade_idcidade = '" + p.getCidade().getId() + "',"
+                        + "lat= '" +p.getLatitude()+ "',"
+                        + "long ='" + p.getLongitude()  + "' where idproprietario = " + p.getId();
+            }
+            System.out.println("SQL = " + sql);
+
+            return !st.execute(sql);
+
+        } catch (Exception e) {
+            System.out.println("Erro 0001 ao salvar proprietario = " + e);
+            return false;
+        }
+    }
+    
+    
     public ArrayList<Proprietario> consultarTodas() {
         ArrayList<Proprietario> propietarios = new ArrayList<>();
 

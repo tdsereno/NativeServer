@@ -11,6 +11,7 @@ import Db.ProprietarioDb;
 import Db.SolicitacaoDB;
 import Db.TipoServicoDb;
 import Model.Arvore;
+import Model.Cidade;
 import Model.Especie;
 import Model.Proprietario;
 import Model.Solicitacao;
@@ -55,6 +56,8 @@ public class actions extends HttpServlet {
 
         if (requisicao.getParameter("acao").equals("cadarvore")) {
             cadastrarArvore();
+        } else if (requisicao.getParameter("acao").equals("cadProp")) {
+            cadastrarProprietario();
         } else if (requisicao.getParameter("acao").equals("listAllArvore")) {
             listarArvores();
         } else if (requisicao.getParameter("acao").equals("listArvore")) {
@@ -76,10 +79,7 @@ public class actions extends HttpServlet {
             } catch (Exception e) {
                 saida.write("Não foi informado o parametro obrigatorio ID da especie");
             }
-   }     
-        
-        
-        else if (requisicao.getParameter("acao").equals("listAllSolicitacoes")) {
+        } else if (requisicao.getParameter("acao").equals("listAllSolicitacoes")) {
             listarSolicitacoes();
         } else if (requisicao.getParameter("acao").equals("listAllTipoServico")) {
             listarTiposServico();
@@ -360,8 +360,6 @@ public class actions extends HttpServlet {
 
     }
 
-    
-    
     private void listEspecie(int id) {
         EspecieDb db = new EspecieDb();
         Especie e = new Especie();
@@ -381,5 +379,34 @@ public class actions extends HttpServlet {
 
     }
 
-    
+    private void cadastrarProprietario() {
+        String id = requisicao.getParameter("id");
+        String nome = requisicao.getParameter("nome");
+        String identificacao = requisicao.getParameter("identificacao");
+        String endRua = requisicao.getParameter("endrua");
+        String idcidade = requisicao.getParameter("idcidade");
+        String lat = requisicao.getParameter("lat");
+        String longi = requisicao.getParameter("long");
+        
+        Proprietario p = new Proprietario();
+        p.setId(Integer.parseInt(id));
+       p.setNome(nome);
+        p.setIdentificacao(identificacao);
+        p.setEnderecoRua(endRua);
+        Cidade c = new Cidade();
+        c.setId(Integer.parseInt(idcidade));
+        p.setCidade(c);
+        p.setLatitude(lat);
+        p.setLongitude(longi);
+        if (salvarProprietario(p)) {
+            saida.write("1 - Registro salvo com sucesso");
+        } else {
+            saida.write("2 - Erro ao cadastrar arvore");
+        }
+
+    }
+
+public boolean salvarProprietario(Proprietario p){
+      ProprietarioDb db = new ProprietarioDb();
+        return db.salvar(p);}
 }
