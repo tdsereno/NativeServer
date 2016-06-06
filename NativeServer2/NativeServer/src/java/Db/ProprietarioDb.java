@@ -37,7 +37,7 @@ public class ProprietarioDb {
                         + "'" + p.getLongitude() + "')";
             } else {
                 // update
-                sql = "update arvore set nome = "
+                sql = "update proprietario set nome = "
                         + "'" + p.getNome() + "',"
                         + "identificacao = '" + p.getIdentificacao() + "',"
                         + "end_rua = '" + p.getEnderecoRua()  + "',"
