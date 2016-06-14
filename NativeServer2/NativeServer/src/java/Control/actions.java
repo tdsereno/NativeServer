@@ -201,6 +201,17 @@ public class actions extends HttpServlet {
                 saida.write("@#" + arvores.get(i).getPropietario().getId());
 
                 saida.write("@#" + arvores.get(i).getStatus());
+                ProprietarioDb pd = new ProprietarioDb();
+                Proprietario p = new Proprietario();
+                p.setId(arvores.get(i).getPropietario().getId());
+                p = pd.consultarProprietario(p);
+                saida.write("@#" + p.getNome());
+                
+                EspecieDb ed = new EspecieDb();
+                Especie e = new Especie();
+                p.setId(arvores.get(i).getEspecie().getId());
+                e = ed.consultarEspecie(e);
+                saida.write("@#" + e.getNome());
 
 //                saida.write("________________");
 //                saida.write("<br>");
@@ -253,7 +264,17 @@ public class actions extends HttpServlet {
             saida.write("@#" + arvore.getPropietario().getId());
 
             saida.write("@#" + arvore.getStatus());
-
+                ProprietarioDb pd = new ProprietarioDb();
+                Proprietario p = new Proprietario();
+                p.setId(arvore.getPropietario().getId());
+                p = pd.consultarProprietario(p);
+                saida.write("@#" + p.getNome());
+                
+                EspecieDb ed = new EspecieDb();
+                Especie e = new Especie();
+                p.setId(arvore.getEspecie().getId());
+                e = ed.consultarEspecie(e);
+                saida.write("@#" + e.getNome());
         } else {
             saida.write("3 - Não foi localizado nenhum registro");
         }
@@ -387,10 +408,10 @@ public class actions extends HttpServlet {
         String idcidade = requisicao.getParameter("idcidade");
         String lat = requisicao.getParameter("lat");
         String longi = requisicao.getParameter("long");
-        
+
         Proprietario p = new Proprietario();
         p.setId(Integer.parseInt(id));
-       p.setNome(nome);
+        p.setNome(nome);
         p.setIdentificacao(identificacao);
         p.setEnderecoRua(endRua);
         Cidade c = new Cidade();
@@ -406,7 +427,8 @@ public class actions extends HttpServlet {
 
     }
 
-public boolean salvarProprietario(Proprietario p){
-      ProprietarioDb db = new ProprietarioDb();
-        return db.salvar(p);}
+    public boolean salvarProprietario(Proprietario p) {
+        ProprietarioDb db = new ProprietarioDb();
+        return db.salvar(p);
+    }
 }
