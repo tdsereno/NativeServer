@@ -10,6 +10,7 @@ import Db.EspecieDb;
 import Db.ProprietarioDb;
 import Db.SolicitacaoDB;
 import Db.TipoServicoDb;
+import Db.UsuarioDb;
 import Model.Arvore;
 import Model.Cidade;
 import Model.Especie;
@@ -60,6 +61,8 @@ public class actions extends HttpServlet {
             cadastrarProprietario();
         } else if (requisicao.getParameter("acao").equals("listAllArvore")) {
             listarArvores();
+        } else if (requisicao.getParameter("acao").equals("autenticar")) {
+            autenticarUsuario();
         } else if (requisicao.getParameter("acao").equals("listArvore")) {
             int id = 0;
             try {
@@ -206,7 +209,7 @@ public class actions extends HttpServlet {
                 p.setId(arvores.get(i).getPropietario().getId());
                 p = pd.consultarProprietario(p);
                 saida.write("@#" + p.getNome());
-                
+
                 EspecieDb ed = new EspecieDb();
                 Especie e = new Especie();
                 p.setId(arvores.get(i).getEspecie().getId());
@@ -264,17 +267,17 @@ public class actions extends HttpServlet {
             saida.write("@#" + arvore.getPropietario().getId());
 
             saida.write("@#" + arvore.getStatus());
-                ProprietarioDb pd = new ProprietarioDb();
-                Proprietario p = new Proprietario();
-                p.setId(arvore.getPropietario().getId());
-                p = pd.consultarProprietario(p);
-                saida.write("@#" + p.getNome());
-                
-                EspecieDb ed = new EspecieDb();
-                Especie e = new Especie();
-                p.setId(arvore.getEspecie().getId());
-                e = ed.consultarEspecie(e);
-                saida.write("@#" + e.getNome());
+            ProprietarioDb pd = new ProprietarioDb();
+            Proprietario p = new Proprietario();
+            p.setId(arvore.getPropietario().getId());
+            p = pd.consultarProprietario(p);
+            saida.write("@#" + p.getNome());
+
+            EspecieDb ed = new EspecieDb();
+            Especie e = new Especie();
+            p.setId(arvore.getEspecie().getId());
+            e = ed.consultarEspecie(e);
+            saida.write("@#" + e.getNome());
         } else {
             saida.write("3 - Não foi localizado nenhum registro");
         }
@@ -430,5 +433,18 @@ public class actions extends HttpServlet {
     public boolean salvarProprietario(Proprietario p) {
         ProprietarioDb db = new ProprietarioDb();
         return db.salvar(p);
+    }
+
+    private void autenticarUsuario() {
+        UsuarioDb ud = new UsuarioDb();
+        String login = requisicao.getParameter("user");
+        String senha = requisicao.getParameter("pass");
+        Usuario u = new Usuario();
+        u.setLogin(login);
+        u.setSenha(senha);
+        int id = ud.autenticarUsuario(u);
+   
+       saida.write(""+id); // vai exibir o id do usuario caso a senha e user estejam corretos, caso contrario exibira "0"
+
     }
 }
