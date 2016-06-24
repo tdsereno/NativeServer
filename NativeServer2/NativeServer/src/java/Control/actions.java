@@ -6,6 +6,7 @@ package Control;
  * and open the template in the editor.
  */
 import Db.ArvoreDb;
+import Db.CidadeDb;
 import Db.EspecieDb;
 import Db.ProprietarioDb;
 import Db.SolicitacaoDB;
@@ -87,7 +88,13 @@ public class actions extends HttpServlet {
         } else if (requisicao.getParameter("acao").equals("listAllTipoServico")) {
             listarTiposServico();
 
-        } else if (requisicao.getParameter("acao").equals("listAllProprietarios")) {
+        } else if (requisicao.getParameter("acao").equals("listAllCidades")) {
+            listarCidades();
+
+        }
+        
+        
+        else if (requisicao.getParameter("acao").equals("listAllProprietarios")) {
             listarProprietarios();
         } else if (requisicao.getParameter("acao").equals("listProprietario")) {
             int id = 0;
@@ -378,8 +385,13 @@ public class actions extends HttpServlet {
 
             saida.write("@#" + p.getEnderecoRua());
 
-            saida.write("@#" + p.getCidade().getId());
+            
+            CidadeDb cdb = new CidadeDb();
+            Cidade city = cdb.consultarCidade(p.getCidade());
+            
+            saida.write("@#" + city.getId());
 
+            saida.write("@#" + city.getNome());
         }
 
     }
@@ -447,4 +459,22 @@ public class actions extends HttpServlet {
        saida.write(""+id); // vai exibir o id do usuario caso a senha e user estejam corretos, caso contrario exibira "0"
 
     }
+
+    private void listarCidades() {
+            CidadeDb db = new CidadeDb();
+        ArrayList<Cidade> tp = db.consultarTodas();
+        if (tp.size() > 0) {
+            for (int i = 0; i < tp.size(); i++) {
+                saida.write("cidade");
+
+                saida.write("@#" + tp.get(i).getId());
+
+                saida.write("@#" + tp.get(i).getNome());
+
+
+            }
+        } else {
+            saida.write("3 - Não foi localizado nenhum registro");
+        }
+}
 }

@@ -39,6 +39,9 @@
         <br>
         <span><a href="/NativeServer/actions?acao=cadProp&id=0&nome=tiago&identificacao=123.456.789-00&idcidade=0&endrua=rua&lat=99&long=33">Clique aqui para inserir um proprietario de exemplo</a></span>
         <br>
+        <br>
+
+        <span><a href="/NativeServer/actions?acao=listAllCidades">Clique aqui para listar todas cidades</a></span>
         
 
 
