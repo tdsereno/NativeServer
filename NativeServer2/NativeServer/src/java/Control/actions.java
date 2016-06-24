@@ -91,10 +91,7 @@ public class actions extends HttpServlet {
         } else if (requisicao.getParameter("acao").equals("listAllCidades")) {
             listarCidades();
 
-        }
-        
-        
-        else if (requisicao.getParameter("acao").equals("listAllProprietarios")) {
+        } else if (requisicao.getParameter("acao").equals("listAllProprietarios")) {
             listarProprietarios();
         } else if (requisicao.getParameter("acao").equals("listProprietario")) {
             int id = 0;
@@ -342,7 +339,12 @@ public class actions extends HttpServlet {
                 saida.write("@#" + p.get(i).getNome());
                 saida.write("@#" + p.get(i).getIdentificacao());
                 saida.write("@#" + p.get(i).getEnderecoRua());
-                saida.write("@#" + p.get(i).getCidade().getId());
+                CidadeDb cdb = new CidadeDb();
+                Cidade city = cdb.consultarCidade(p.get(i).getCidade());
+
+                saida.write("@#" + city.getId());
+
+                saida.write("@#" + city.getNome());
             }
         } else {
             saida.write("3 - Não foi localizado nenhum registro");
@@ -385,10 +387,9 @@ public class actions extends HttpServlet {
 
             saida.write("@#" + p.getEnderecoRua());
 
-            
             CidadeDb cdb = new CidadeDb();
             Cidade city = cdb.consultarCidade(p.getCidade());
-            
+
             saida.write("@#" + city.getId());
 
             saida.write("@#" + city.getNome());
@@ -455,13 +456,13 @@ public class actions extends HttpServlet {
         u.setLogin(login);
         u.setSenha(senha);
         int id = ud.autenticarUsuario(u);
-   
-       saida.write(""+id); // vai exibir o id do usuario caso a senha e user estejam corretos, caso contrario exibira "0"
+
+        saida.write("" + id); // vai exibir o id do usuario caso a senha e user estejam corretos, caso contrario exibira "0"
 
     }
 
     private void listarCidades() {
-            CidadeDb db = new CidadeDb();
+        CidadeDb db = new CidadeDb();
         ArrayList<Cidade> tp = db.consultarTodas();
         if (tp.size() > 0) {
             for (int i = 0; i < tp.size(); i++) {
@@ -471,10 +472,9 @@ public class actions extends HttpServlet {
 
                 saida.write("@#" + tp.get(i).getNome());
 
-
             }
         } else {
             saida.write("3 - Não foi localizado nenhum registro");
         }
-}
+    }
 }
